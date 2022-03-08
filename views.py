@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.core.mail import EmailMessage, send_mail
+from django.contrib.sites.shortcuts import get_current_site
 
 from rest_framework import viewsets
 from rest_framework import status
@@ -49,7 +50,7 @@ mail_body = """
 {email}様
 
 お世話になっております。
-HurryUp,We'reDreaming.comへのお問い合わせありがとうございました。
+{site_name}へのお問い合わせありがとうございました。
 
 以下の内容でお問い合わせを受け付けいたしました。管理人が確認いたします
 
@@ -62,8 +63,8 @@ E-Mail：{email}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ———————————————————————
-Hurry Up, We're Dreaming
-https://hurryupwearedreaming.com/
+{site_name}
+https://{site_domain}/
 
 ———————————————————————"""
 
@@ -73,18 +74,22 @@ class ContactCreate(generics.CreateAPIView):
     serializer_class = serializers.ContactSerializer 
 
     def create(self, request, *args, **kwargs):
-        # send email. etc
+        current_site = get_current_site(request)
+        site_name = current_site.name
+        site_domain = current_site.domain
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         json = serializer.data['json']
         email = json['email']
         message = json['message']
+
         email_message = EmailMessage(
-            "【HurryUp,We'reDreaming.com】お問い合わせありがとうございます",
-            mail_body.format(email=email, message=message),
-            'no-reply@huwd.jp',
+            f"【{site_name}】お問い合わせありがとうございます",
+            mail_body.format(email=email, message=message, site_name=site_name, site_domain=site_domain),
+            f'no-reply@{site_domain}',
             [email,],
-            ['contact@huwd.jp',],
+            [f'contact@{site_domain}',],
             #reply_to=['another@example.com'],
             #headers={'Message-ID': 'foo'},
         )
