@@ -7,5 +7,6 @@ Djangoの問い合わせフォームです。
 
 
 - Django Rest Framework
+- Sites Framework
 
 に依存しています
