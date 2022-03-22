@@ -1,5 +1,5 @@
 # contact
-Django Contact App
+Django Contact App Example
 
 Djangoの問い合わせフォームです。
 
@@ -11,6 +11,7 @@ Djangoの問い合わせフォームです。
 
 ## Example
 
+下記例は https://github.com/zoonaka/accounts-app を使用しています
 
 ```shell
 $ git submodule add git@github.com:zoonaka/contact.git
@@ -97,4 +98,40 @@ urlpatterns = [
   </div>
 </div>
 {% endblock %}
+```
+
+```
+<!-- theme/template/theme/header.html -->
+
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img class="bi me-2" width="40" height="32" aria-label="logo" src="{% static 'theme/images/logo.svg' %}"/>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        {% if not user.is_authenticated %}
+        <li><a href="{% url 'login' %}?next={{ request.path }}" class="nav-link px-2 text-secondary">Login</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}?next={{ request.path }}" class="nav-link px-2 text-secondary">Logout</a></li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</header>
+```
+
+```
+<!-- theme/template/theme/footer.html -->
+
+<footer class="bg-dark text-center text-white mt-5 pt-5 text-muted text-small">
+  <!-- Copyright -->
+  <div class="text-center p-3 bg-dark">
+    SITE_NAME
+  </div>
+  <!-- Copyright -->
+</footer>
 ```
