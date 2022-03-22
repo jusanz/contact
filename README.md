@@ -11,6 +11,7 @@ Djangoの問い合わせフォームです。
 
 ## Example
 
+下記例は https://github.com/zoonaka/accounts-app を使用しています
 
 ```shell
 $ git submodule add git@github.com:zoonaka/contact.git
