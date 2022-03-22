@@ -1,5 +1,5 @@
 # contact
-Django Contact App
+Django Contact App Example
 
 Djangoの問い合わせフォームです。
 
