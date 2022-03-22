@@ -106,7 +106,7 @@ urlpatterns = [
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <img class="bi me-2" width="40" height="32" aria-label="site-logo" src="{% static 'theme/images/logo.svg' %}"/>
+        <img class="bi me-2" width="40" height="32" aria-label="logo" src="{% static 'theme/images/logo.svg' %}"/>
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
