@@ -97,5 +97,7 @@ class ContactCreate(generics.CreateAPIView):
         return super().create(request, *args, **kwargs)
 
 def contact_view(request):
-    context = {'is_debug': settings.DEBUG}
+    current_site = get_current_site(request)
+    site_name = current_site.name
+    context = {'is_debug': settings.DEBUG, "site_name": site_name}
     return render(request, 'contact/contact.html', context)
