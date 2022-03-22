@@ -87,7 +87,7 @@ class ContactCreate(generics.CreateAPIView):
         email_message = EmailMessage(
             f"【{site_name}】お問い合わせありがとうございます",
             mail_body.format(email=email, message=message, site_name=site_name, site_domain=site_domain),
-            f'no-reply@{site_domain}',
+            f'noreply@{site_domain}',
             [email,],
             [f'contact@{site_domain}',],
             #reply_to=['another@example.com'],
